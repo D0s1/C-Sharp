@@ -1,19 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Runtime.CompilerServices;
+
 Console.WriteLine("Enter Text");
 Random rnd = new Random();
-int firstNumber = rnd.Next(1,100);
-int secondNumber = rnd.Next(1,100);
-Console.WriteLine($"{firstNumber} + {secondNumber}");
-string input = Console.ReadLine();
-if (firstNumber + secondNumber ==  Int32.Parse(input)){
-    Console.WriteLine("Right!");
+
+bool correctAnswer = true;
+while (giveQuestion())
+{
+    
 }
-else{
-    Console.WriteLine($" Wrong! {firstNumber} + {secondNumber} = {firstNumber+secondNumber}");
-}
-input = Console.ReadLine();
-Console.WriteLine(input);
+string textInput = Console.ReadLine();
+Console.WriteLine(textInput);
 var userid = 0;
 var Bog = new Bogus.Faker<User>()
     .RuleFor( u => u.Id, f => userid++)
@@ -23,6 +21,23 @@ List<User> users = Bog.Generate(20);
 foreach (User user in users)
 {
     Console.WriteLine($"{user.Id}\t{user.Name}");
+}
+
+bool giveQuestion()
+{
+    int firstNumber = rnd.Next(1,100);
+    int secondNumber = rnd.Next(1,100);
+    Console.WriteLine($"{firstNumber} + {secondNumber}");
+    string input = Console.ReadLine();
+    if (firstNumber + secondNumber ==  Int32.Parse(input)){
+        Console.WriteLine("Right!");
+        return true;
+    }
+    else{
+        Console.WriteLine($" Wrong! {firstNumber} + {secondNumber} = {firstNumber+secondNumber}");
+        return false;
+    }
+     
 }
 
 class User()
