@@ -25,8 +25,8 @@ foreach (User user in users)
 
 bool giveQuestion()
 {
-    int firstNumber = rnd.Next(1,100);
-    int secondNumber = rnd.Next(1,100);
+    int firstNumber = rnd.Next(1,1000);
+    int secondNumber = rnd.Next(1,1000);
     Console.WriteLine($"{firstNumber} + {secondNumber}");
     string input = Console.ReadLine();
     if (firstNumber + secondNumber ==  Int32.Parse(input)){
