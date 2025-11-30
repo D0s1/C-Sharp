@@ -5,10 +5,7 @@ Console.WriteLine("Enter Text");
 Random rnd = new Random();
 
 bool correctAnswer = true;
-while (giveQuestion())
-{
-    
-}
+while (giveQuestion());
 string textInput = Console.ReadLine();
 Console.WriteLine(textInput);
 var userid = 0;
