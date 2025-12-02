@@ -1,5 +1,4 @@
-﻿
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 Console.WriteLine("Enter Text");
 Random rnd = new Random();
@@ -45,8 +44,13 @@ bool giveQuestion()
         result = firstNumber * secondNumber;
     }
     
-    string input = Console.ReadLine();
-    if (result ==  Int32.Parse(input)){
+    int number;
+    while (!int.TryParse(Console.ReadLine(), out number))
+    {
+        Console.WriteLine("Input is not a valid number");
+    }
+    
+    if (result ==  number){
         Console.WriteLine("Right!");
         return true;
     }
