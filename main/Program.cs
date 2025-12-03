@@ -3,7 +3,8 @@
 Console.WriteLine("Enter Text");
 Random rnd = new Random();
 
-while (giveQuestion());
+int rightAnswers = 0;
+while (giveQuestion(rightAnswers)){rightAnswers++;};
 var userid = 0;
 var Bog = new Bogus.Faker<User>()
     .RuleFor( u => u.Id, f => userid++)
@@ -15,7 +16,7 @@ foreach (User user in users)
     Console.WriteLine($"{user.Id}\t{user.Name}");
 }
 
-bool giveQuestion()
+bool giveQuestion(int rightAnswers)
 {
     int operationValue = rnd.Next(1,4);
     int result;
@@ -51,11 +52,11 @@ bool giveQuestion()
     }
     
     if (result ==  number){
-        Console.WriteLine("Right!");
+        Console.WriteLine($"Right! You have answered {rightAnswers+1} correct sofar!");
         return true;
     }
     else{
-        Console.WriteLine($" Wrong! Solution ist {result}");
+        Console.WriteLine($" Wrong! Solution is {result}");
         return false;
     }
      
