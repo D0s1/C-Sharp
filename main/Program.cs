@@ -3,8 +3,15 @@
 Console.WriteLine("Enter Text");
 Random rnd = new Random();
 
+int maxHP=5;
+int currentHP = maxHP;
 int rightAnswers = 0;
+while (currentHP != 0){
 while (giveQuestion(rightAnswers)){rightAnswers++;};
+currentHP--;
+Console.WriteLine("Wrong! Lifes remaining: " + new String('o', currentHP)+ new String('-', maxHP-currentHP));
+}
+Console.WriteLine($"Game over, Total Score: {rightAnswers}");
 var userid = 0;
 var Bog = new Bogus.Faker<User>()
     .RuleFor( u => u.Id, f => userid++)
