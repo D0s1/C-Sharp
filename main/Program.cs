@@ -3,18 +3,75 @@
 Console.WriteLine("Enter Text");
 Random rnd = new Random();
 
-int maxHP=5;
-int currentHP = maxHP;
-int rightAnswers = 0;
-while (currentHP != 0){
-while (giveQuestion(rightAnswers)){rightAnswers++;};
-currentHP--;
-Console.WriteLine("Wrong! Lifes remaining: " + new String('o', currentHP)+ new String('-', maxHP-currentHP));
+RunQuiz(5);
+
+bool giveQuestion(int rightAnswers)
+{
+    int operationValue = rnd.Next(1, 4);
+    int result;
+    if (operationValue == 1)
+    {
+        int firstNumber = rnd.Next(1, 1000);
+        int secondNumber = rnd.Next(1, 1000);
+        Console.WriteLine($"{firstNumber} + {secondNumber}");
+        result = firstNumber + secondNumber;
+
+    }
+
+    else if (operationValue == 2)
+    {
+        int firstNumber = rnd.Next(1, 1000);
+        int secondNumber = rnd.Next(1, 1000);
+        Console.WriteLine($"{firstNumber} - {secondNumber}");
+        result = firstNumber - secondNumber;
+
+    }
+    else
+    {
+        int firstNumber = rnd.Next(1, 100);
+        int secondNumber = rnd.Next(1, 10);
+        Console.WriteLine($"{firstNumber} * {secondNumber}");
+        result = firstNumber * secondNumber;
+    }
+
+    int number;
+    while (!int.TryParse(Console.ReadLine(), out number))
+    {
+        Console.WriteLine("Input is not a valid number");
+    }
+
+    if (result == number)
+    {
+        Console.WriteLine($"Right! You have answered {rightAnswers + 1} correct sofar!");
+        return true;
+    }
+    else
+    {
+        Console.WriteLine($" Wrong! Solution is {result}");
+        return false;
+    }
+
 }
-Console.WriteLine($"Game over, Total Score: {rightAnswers}");
+
+void RunQuiz(int maxHP)
+{
+    int currentHP = maxHP;
+    int rightAnswers = 0;
+    while (currentHP != 0)
+    {
+        while (giveQuestion(rightAnswers)) { rightAnswers++; }
+        ;
+        currentHP--;
+        Console.WriteLine("Wrong! Lifes remaining: " + new String('o', currentHP) + new String('-', maxHP - currentHP));
+    }
+    Console.WriteLine($"Game over, Total Score: {rightAnswers}");
+    
+}
+
+
 var userid = 0;
 var Bog = new Bogus.Faker<User>()
-    .RuleFor( u => u.Id, f => userid++)
+    .RuleFor(u => u.Id, f => userid++)
     .RuleFor(u => u.Name, f => Guid.NewGuid().ToString());
 
 List<User> users = Bog.Generate(20);
@@ -22,60 +79,13 @@ foreach (User user in users)
 {
     Console.WriteLine($"{user.Id}\t{user.Name}");
 }
-
-bool giveQuestion(int rightAnswers)
-{
-    int operationValue = rnd.Next(1,4);
-    int result;
-    if (operationValue == 1)
-    {
-        int firstNumber = rnd.Next(1,1000);
-        int secondNumber = rnd.Next(1,1000);
-        Console.WriteLine($"{firstNumber} + {secondNumber}");
-        result = firstNumber + secondNumber;
-        
-    }
-
-    else if (operationValue == 2)
-    {
-        int firstNumber = rnd.Next(1,1000);
-        int secondNumber = rnd.Next(1,1000);
-        Console.WriteLine($"{firstNumber} - {secondNumber}");
-        result = firstNumber - secondNumber;
-        
-    }
-    else
-    {
-        int firstNumber = rnd.Next(1,100);
-        int secondNumber = rnd.Next(1,10);
-        Console.WriteLine($"{firstNumber} * {secondNumber}");
-        result = firstNumber * secondNumber;
-    }
-    
-    int number;
-    while (!int.TryParse(Console.ReadLine(), out number))
-    {
-        Console.WriteLine("Input is not a valid number");
-    }
-    
-    if (result ==  number){
-        Console.WriteLine($"Right! You have answered {rightAnswers+1} correct sofar!");
-        return true;
-    }
-    else{
-        Console.WriteLine($" Wrong! Solution is {result}");
-        return false;
-    }
-     
-}
-
 class User()
 {
-    public int Id{get;set;}
-    public string? Name{get;set;}
+    public int Id { get; set; }
+    public string? Name { get; set; }
 
-    public User(string name):this()
+    public User(string name) : this()
     {
         Name = name;
-    }    
+    }
 }
