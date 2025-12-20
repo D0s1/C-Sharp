@@ -1,9 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
 using System;
+using System.Globalization;
 
 Console.WriteLine("Enter Text");
 Random rnd = new Random();
 
+generateAndSortList();
 RunGuesser();
 RunQuiz(5);
 bool GiveQuestion(int rightAnswers)
@@ -58,6 +60,16 @@ void RunGuesser()
 
         Console.WriteLine($" The right number is {numberClass.Relation(numberGuessed)}");
     }
+}
+
+void generateAndSortList()
+{
+    List<int> numbers = Quicksort.SortAndReturnList(Enumerable.Range(0, 10).Select(_ => rnd.Next(0, 100)).ToList());
+    Console.WriteLine(string.Join(", ", numbers));
+}
+
+{
+    throw new NotImplementedException();
 }
 
 var userid = 0;
